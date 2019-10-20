@@ -51,3 +51,4 @@ func takeDamage(damage):
 			gm.gameOver()
 		else:
 			gm.onEnemyDeath()
+		free()
