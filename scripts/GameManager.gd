@@ -93,7 +93,10 @@ func _ready():
 #	
 	fusionTable = [fireFsn, waterFsn, airFsn, electricFsn, iceFsn, metalFsn]
 	
-	instantiateEnemy(enemyIndex)
+	#instantiateEnemy(enemyIndex)
+	currentEnemy = enemy.instance()
+	add_child(currentEnemy)
+	currentEnemy.gm = $"."
 	startTurn(turn)
 
 func _process(delta):
