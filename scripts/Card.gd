@@ -69,6 +69,7 @@ func _process(delta):
 	pass
 
 func onMouseEnter():
+	print("to aqui carai")
 	isFocus = true
 
 

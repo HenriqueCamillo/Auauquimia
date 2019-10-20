@@ -36,5 +36,6 @@ status = 1
 
 [node name="Hand" parent="Player" instance=ExtResource( 10 )]
 position = Vector2( 623.482, 251.681 )
+
 [connection signal="playerTurn" from="." to="Player" method="onTurnStart"]
 [connection signal="turnEnded" from="Player" to="." method="onTurnEnded"]
