@@ -46,7 +46,7 @@ var fusionTable = []
 
 		
 		
-# Called when the node enters the scene tree for the first time.
+# Creates the fusion and the attack table
 func _ready():
 	# Loads Attack Result class
 	var ar = preload("res://scripts/AttackResult.gd")
