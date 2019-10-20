@@ -22,3 +22,8 @@ func endTurn():
 		emit_signal("turnEnded")
 	else:
 		pass
+		
+func takeDamage(damage):
+	life -= damage
+	print("Took damage: " + str(damage))
+	print("Life = " + str(life))

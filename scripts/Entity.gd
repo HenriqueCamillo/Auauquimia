@@ -45,3 +45,9 @@ func takeDamage(damage):
 	life -= damage
 	print("Took damage: " + str(damage))
 	print("Life = " + str(life))
+	
+	if (life <= 0):
+		if (whoIAm == GameManager.Character.Player):
+			gm.gameOver()
+		else:
+			gm.onEnemyDeath()

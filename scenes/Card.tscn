@@ -35,6 +35,5 @@ custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Nome"
 align = 1
-
 [connection signal="mouse_entered" from="Art" to="." method="onMouseEnter"]
 [connection signal="mouse_exited" from="Art" to="." method="onMouseExit"]

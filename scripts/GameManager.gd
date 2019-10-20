@@ -55,7 +55,12 @@ signal enemyTurn
 
 var currentEnemy
 var enemyIndex = 0
-export (Array, PackedScene) var enemies
+export (PackedScene) var enemy
+export (Array, Resource) var enemies
+
+export (PackedScene) var card
+export (Array, Resource) var cards
+
 
 # Creates the fusion and the attack table
 func _ready():
@@ -102,7 +107,7 @@ func getAttackResult(type, status):
 	return attackTable[type][status]
 	
 # Returns the type of the result card of the fusion
-func getFusionResult(type1, type2):
+func getFusionResultType(type1, type2):
 	# If both are level 1
 	if (type1 < Type.Fire2 and type2 < Type.Fire2):
 		return fusionTable[type1][type2]
@@ -155,9 +160,32 @@ func onEnemyDeath():
 		
 func instantiateEnemy(index):
 	print("New enemy")
-	currentEnemy = enemies[index].instance()
+	currentEnemy = enemy.instance()
 	add_child(currentEnemy)
+	
+	var enemyData = enemies[index]
+	
 	currentEnemy.gm = $"."
+	currentEnemy.life = enemyData.life
+	currentEnemy.attack = enemyData.attack
+	#TODO add other things
 	
 func attackPlayer(damage):
-	$Player.takeDamage(damage)	
+	$Player.takeDamage(damage)
+	
+func gameOver():
+	pass
+	
+func castCard(caster, card, target):
+	var result = getAttackResult(card.type, currentEnemy.status)
+	target.status = result.status
+	target.takeDamage(card.damage * result.multiplier)
+	
+	caster.onCastCard()
+
+func getFusionCard(caster, card1, card2):
+	var result = getFusionResultType(card1.type, card2.type)
+	if (result != Type.None):
+		for i in range(cards.size()):
+			if (cards[i].type == result):
+				return cards[i]

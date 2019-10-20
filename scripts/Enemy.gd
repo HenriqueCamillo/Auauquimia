@@ -4,6 +4,8 @@ extends "Entity.gd"
 #func _ready():
 #	pass # Replace with function body.
 
+var attack
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if (Input.is_action_just_pressed("ui_up") and whoIAm == gm.turn):
@@ -15,8 +17,10 @@ func onTurnStart():
 		attack()
 		
 func attack():
-	#if (status == GameManager.Status.Paralyzed):
-	gm.attackPlayer(2)
+	if (status == GameManager.Status.Paralyzed):
+		if (randf() < paralyzisAttackFailPercentage):
+			return
+	gm.attackPlayer(attack)
 	
 func endTurn():
 	print("end")
