@@ -14,5 +14,9 @@ func _process(delta):
 func placeCard(index, card):
 	if cards[index] != null:
 		cards[index].onRelease(null)
-	
 	cards[index] = card
+
+func genCard():
+	if cards[0] != null && cards[1] != null:
+		var cardName = 'metal' #substituir pela função de fusão
+		get_parent().loadCard(cardName)

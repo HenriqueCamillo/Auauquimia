@@ -108,3 +108,10 @@ func shift(offset, count, rot):
 		elif (count % 2 == 1 && handIndex > count/2):
 			originalPos.y -= offset.y
 			originalRot -= rot
+			
+func refresh(eraseIndex, offset, count, rot):
+	if handIndex == eraseIndex:
+		queue_free()
+	elif handIndex > eraseIndex:
+		shift(-offset, count, -rot)
+	

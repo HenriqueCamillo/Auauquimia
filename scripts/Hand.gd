@@ -2,7 +2,7 @@ extends Node2D
 
 #exports
 export (PackedScene) var card
-export (int) var cardMax = 7
+export (int) var cardMax = 1000
 export (Vector2) var center = Vector2(0, 0)
 export (Vector2) var offset = Vector2(150, 50)
 export (float) var rot = 0.25
@@ -32,6 +32,10 @@ func _process(delta):
 		drawCard()
 
 func drawCard():
+	var sortCard = rng.randi_range(0, deck.size() - 1)
+	loadCard(deck[sortCard])
+
+func loadCard(cardName):
 	if cardCount + 1 <= cardMax:
 		#instance card
 		var c = card.instance()
@@ -45,9 +49,8 @@ func drawCard():
 		c.rotate(round(cardCount/2) * rot / 2)
 		
 		c.add_to_group("cards")
-		#initialize card
-		var sortCard = rng.randi_range(0, deck.size() - 1)
-		c.init(deck[sortCard], cardCount)
+		
+		c.init(cardName, cardCount)
 
 func grabCard(card):
 	cardOnHand = card
