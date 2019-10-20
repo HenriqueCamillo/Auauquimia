@@ -8,4 +8,3 @@ position = Vector2( 640, 360 )
 script = ExtResource( 1 )
 card = ExtResource( 2 )
 offset = Vector2( 120, 40 )
-

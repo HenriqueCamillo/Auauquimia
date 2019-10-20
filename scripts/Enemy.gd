@@ -1,24 +1,23 @@
 extends "Entity.gd"
 
-onready var hand = get_node("Hand")
-signal turnEnded
-
 # Called when the node enters the scene tree for the first time.
 #func _ready():
 #	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if (Input.is_action_just_pressed("ui_down") and whoIAm == gm.turn):
+	if (Input.is_action_just_pressed("ui_up") and whoIAm == gm.turn):
 		endTurn()
-#	pass
 
 func onTurnStart():
-	if (status == GameManager.Status.Frozen):
-		actions -= frozenActions
+	for i in range(3):
+		print("Attacking")
+		attack()
 		
+func attack():
+	#if (status == GameManager.Status.Paralyzed):
+	gm.attackPlayer(2)
+	
 func endTurn():
-	if (hand.cardCount <= maxCardsOnTurnEnd):
-		emit_signal("turnEnded")
-	else:
-		pass
+	print("end")
+	gm.onTurnEnded()

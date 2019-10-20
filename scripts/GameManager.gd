@@ -50,6 +50,12 @@ var attackTable = []
 var fusionTable = []
 
 var turn = Character.Player
+signal playerTurn
+signal enemyTurn
+
+var currentEnemy
+var enemyIndex = 0
+export (Array, PackedScene) var enemies
 
 # Creates the fusion and the attack table
 func _ready():
@@ -81,6 +87,13 @@ func _ready():
 	var metalFsn	= [Type.MetalFire,	Type.None,			Type.None,			Type.MetalElectric,	Type.None,		Type.Metal2]
 #	
 	fusionTable = [fireFsn, waterFsn, airFsn, electricFsn, iceFsn, metalFsn]
+	
+	instantiateEnemy(enemyIndex)
+	startTurn(turn)
+
+func _process(delta):
+	#print(turn)
+	pass
 
 # Returns the attack result containing the multiplier and the status
 func getAttackResult(type, status):
@@ -112,19 +125,39 @@ func getFusionResult(type1, type2):
 
 # Changes the turn, passes the signal to the entities, and then starts the turn
 func onTurnEnded():
-	switchTurn()
 	get_tree().call_group("Entities", "onTurnEnded")
+	switchTurn()
+	print("Called entities")
 	startTurn(turn)
 	
 func switchTurn():
+	print("Switching turn...")
 	if (turn == Character.Player):
+		print("Enemy's turn")
 		turn = Character.Enemy
 	else:
+		print("Player's turn")
 		turn = Character.Player
 		
 func startTurn(turn):
 	if (turn == Character.Player):
-		pass
+		emit_signal("playerTurn")
 	else:
-		pass
+		currentEnemy.onTurnStart()
 	
+func onEnemyDeath():
+	enemyIndex += 1
+	if (enemyIndex < enemies.size()):
+		instantiateEnemy(enemyIndex)
+	else:
+		# Finished the game
+		pass
+		
+func instantiateEnemy(index):
+	print("New enemy")
+	currentEnemy = enemies[index].instance()
+	add_child(currentEnemy)
+	currentEnemy.gm = $"."
+	
+func attackPlayer(damage):
+	$Player.takeDamage(damage)	

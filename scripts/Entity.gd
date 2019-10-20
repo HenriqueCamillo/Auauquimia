@@ -1,8 +1,10 @@
 extends Node
 
+var gm
+
 export (int) var life
 export (int) var maxCardsOnTurnEnd
-export (int) var maxOfActions
+export (int) var maxActions
 var actions
 
 export (float) var paralyzisAttackFailPercentage
@@ -13,12 +15,10 @@ export (GameManager.Status) var status = GameManager.Status.None
 export (GameManager.Character) var whoIAm
 
 func _ready():
+	print("hello world")
+	gm = get_tree().get_root().get_node("GameManager")
 	add_to_group("Entities")
-	actions = maxOfActions
-	
-# Deals burn damage
-func burn():
-	life -= burnDamage
+	actions = maxActions
 	
 # Returns true or false
 func attackSuccessful():
@@ -35,6 +35,13 @@ func onCardUsed():
 	actions -= 1
 
 func onTurnEnded():
-	if (GameManager.turn == whoIAm):
+	# If my turn ended
+	if (gm.turn != whoIAm):
 		if (status == GameManager.Status.Burning):
-			burn()
+			print("Burn damage")
+			takeDamage(burnDamage)
+			
+func takeDamage(damage):
+	life -= damage
+	print("Took damage: " + str(damage))
+	print("Life = " + str(life))
