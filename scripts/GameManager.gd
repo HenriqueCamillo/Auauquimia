@@ -48,6 +48,7 @@ var fusionTable = []
 		
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Loads Attack Result class
 	var ar = preload("res://scripts/AttackResult.gd")
 	
 										# None						# Burning						# Wet						# Paralyzed						# Frozen
@@ -76,9 +77,10 @@ func _ready():
 #	
 	fusionTable = [fireFsn, waterFsn, airFsn, electricFsn, iceFsn, metalFsn]
 
+# Returns the attack result containing the multiplier and the status
 func getAttackResult(type, status):
 	if (type >= Type.Fire2):
-		type -= Type.Fire2
+		type -= Type.Fire2 - Type.Fire
 	return typeStatusTable[type][status]
 	
 # Returns the type of the result card of the fusion
