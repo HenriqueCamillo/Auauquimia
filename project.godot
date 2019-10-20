@@ -39,6 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Auauquimia"
+run/main_scene="res://scenes/GameManager.tscn"
 config/icon="res://icon.png"
 
 [display]

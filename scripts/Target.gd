@@ -45,7 +45,9 @@ func interact(card):
 		get_parent().placeCard(index, card)
 	else:
 		var cardInfo = load("res://cards/" + card.title.to_lower() + ".tres")
-		#GameManager(player, cardInfo, get_parent().enemy???)
+		
+		var gm = get_parent().gm
+		gm.castCard(gm.player, cardInfo, get_parent())
 		pass
 	print("LEEEEROOOOOOYYY")
 

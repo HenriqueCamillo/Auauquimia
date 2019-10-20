@@ -20,6 +20,7 @@ cards = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 639.567, 358.178 )
 scale = Vector2( 0.667625, 0.667625 )
+z_index = -10
 texture = ExtResource( 8 )
 
 [node name="Player" parent="." groups=[
