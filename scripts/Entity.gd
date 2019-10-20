@@ -3,23 +3,19 @@ extends Node
 export (int) var life
 export (int) var maxCardsOnTurnEnd
 export (int) var maxOfActions
+var actions
 
 export (float) var paralyzisAttackFailPercentage
-export (int) var frozenCards
+export (int) var frozenActions
 export (int) var burnDamage
 
 export (GameManager.Status) var status = GameManager.Status.None
 export (GameManager.Character) var whoIAm
 
-
-
 func _ready():
-	add_to_group("Entities")	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+	add_to_group("Entities")
+	actions = maxOfActions
+	
 # Deals burn damage
 func burn():
 	life -= burnDamage
@@ -33,12 +29,12 @@ func attackSuccessful():
 			return true
 
 func onCardMerged():
-	pass
+	actions -= 1
 
 func onCardUsed():
-	pass
+	actions -= 1
 
 func onTurnEnded():
 	if (GameManager.turn == whoIAm):
-		if (status == GameManager.Burning):
+		if (status == GameManager.Status.Burning):
 			burn()
