@@ -80,6 +80,7 @@ func onRelease(destiny):
 		position = originalPos
 		rotation = originalRot
 		z_index = originalZ
+		
 		inHand = true
 	else:
 		destiny.add_child($".")
