@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "AttackResult",
+"language": "GDScript",
+"path": "res://scripts/AttackResult.gd"
+}, {
+"base": "Node2D",
+"class": "GameManager",
+"language": "GDScript",
+"path": "res://scripts/GameManager.gd"
+} ]
 _global_script_class_icons={
-
+"AttackResult": "",
+"GameManager": ""
 }
 
 [application]
