@@ -1,0 +1,10 @@
+[gd_scene format=2]
+
+[node name="Target" type="Node2D" groups=[
+"target",
+]]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
