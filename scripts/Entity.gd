@@ -31,7 +31,7 @@ func attackSuccessful():
 func onCardMerged():
 	actions -= 1
 
-func onCardUsed():
+func onCastCard():
 	actions -= 1
 
 func onTurnEnded():

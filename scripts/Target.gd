@@ -45,9 +45,10 @@ func interact(card):
 		get_parent().placeCard(index, card)
 	else:
 		var cardInfo = load("res://cards/" + card.title.to_lower() + ".tres")
-		
 		var gm = get_parent().gm
 		gm.castCard(gm.player, cardInfo, get_parent())
+		
+		card.queue_free()
 		pass
 	print("LEEEEROOOOOOYYY")
 
