@@ -10,3 +10,5 @@ maxActions = 4
 frozenActions = 2
 burnDamage = 2
 whoIAm = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]

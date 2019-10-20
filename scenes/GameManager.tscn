@@ -1,19 +1,24 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/GameManager.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://enemies/auauquemia.tres" type="Resource" id=3]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Hand.tscn" type="PackedScene" id=5]
+[ext_resource path="res://cards/air.tres" type="Resource" id=4]
+[ext_resource path="res://cards/energy.tres" type="Resource" id=5]
+[ext_resource path="res://cards/fire.tres" type="Resource" id=6]
+[ext_resource path="res://cards/water.tres" type="Resource" id=7]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Hand.tscn" type="PackedScene" id=9]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource( 1 )
 enemy = ExtResource( 2 )
 enemies = [ ExtResource( 3 ) ]
+cards = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
 
 [node name="Player" parent="." groups=[
 "Entities",
-] instance=ExtResource( 4 )]
+] instance=ExtResource( 8 )]
 life = 20
 maxCardsOnTurnEnd = 5
 paralyzisAttackFailPercentage = 0.5
@@ -21,6 +26,6 @@ frozenActions = 2
 burnDamage = 2
 status = 1
 
-[node name="Hand" parent="Player" instance=ExtResource( 5 )]
+[node name="Hand" parent="Player" instance=ExtResource( 9 )]
 [connection signal="playerTurn" from="." to="Player" method="onTurnStart"]
 [connection signal="turnEnded" from="Player" to="." method="onTurnEnded"]

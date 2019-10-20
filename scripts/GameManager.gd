@@ -183,9 +183,11 @@ func castCard(caster, card, target):
 	
 	caster.onCastCard()
 
-func getFusionCard(caster, card1, card2):
+func getFusionCard(card1, card2):
 	var result = getFusionResultType(card1.type, card2.type)
 	if (result != Type.None):
 		for i in range(cards.size()):
 			if (cards[i].type == result):
 				return cards[i]
+	else:
+		return null
