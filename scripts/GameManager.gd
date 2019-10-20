@@ -61,12 +61,12 @@ export (Array, Resource) var enemies
 export (PackedScene) var card
 export (Array, Resource) var cards
 
-
+var player
 # Creates the fusion and the attack table
 func _ready():
 	# Loads Attack Result class
 	var ar = preload("res://scripts/AttackResult.gd")
-	
+	player = $Player
 										# None						# Burning						# Wet						# Paralyzed						# Frozen
 	var fireAtck			= [ar.new(1, Status.Burning), 	ar.new(1, Status.Burning),		ar.new(0, Status.None),			ar.new(1, Status.NoChanges),	ar.new(0.5, Status.Wet)]
 	var waterAtck			= [ar.new(0, Status.Wet),		ar.new(0, Status.None),			ar.new(0, Status.Wet),			ar.new(0, Status.NoChanges),	ar.new(0, Status.NoChanges)]
