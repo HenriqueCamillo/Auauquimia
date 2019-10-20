@@ -3,6 +3,7 @@ extends Node2D
 var isFocus = false
 var isGrabbed = false
 var canDrag = true
+var inHand = false
 
 # Vector 2
 var mouseOffset = Vector2(0,0)
@@ -23,8 +24,6 @@ var originalPos = Vector2(0,0)
 var originalRot = 0
 var originalZ = 0
 
-signal released
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,6 +31,7 @@ func _ready():
 
 func init(cardName, index):
 	handIndex = index
+	inHand = true
 	
 	var info = load("res://cards/" + cardName + ".tres")
 	title = info.name
@@ -43,9 +43,6 @@ func init(cardName, index):
 	
 	$Art.texture = info.art
 	$Name.text = title
-	
-	print(str(handIndex) + "-> pos: " + str(position) + " rot: " + str(rotation))
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -55,18 +52,20 @@ func _process(delta):
 		if !isGrabbed:
 			isGrabbed = true
 			mouseOffset = position - mousePos
-			originalPos = position
-			originalRot = rotation
-			originalZ = z_index
+			if (inHand):
+				originalPos = position
+				originalRot = rotation
+				originalZ = z_index
 			rotation = 0.0
 			z_index = 5
+			get_parent().grabCard($".")
 		else:
 			position = mousePos + mouseOffset
 			
 	if (Input.is_action_just_released("left_click") && isGrabbed):
 		isGrabbed = false
-		emit_signal("released")
-		onRelease(null)
+		get_parent().releaseCard()
+		#onRelease(null)
 	pass
 
 func onMouseEnter():
@@ -81,17 +80,31 @@ func onRelease(destiny):
 		position = originalPos
 		rotation = originalRot
 		z_index = originalZ
+		inHand = true
+	else:
+		destiny.add_child($".")
+		global_position = destiny.global_position
+		destiny.interact($".")
+		inHand = false
 	
 func shift(offset, count, rot):
-	position.x -= offset.x
-	
-	if (count % 2 == 0 && handIndex <= count/2):
-		position.y += offset.y
-		rotate(-rot)
+	if inHand:
+		position.x -= offset.x
 		
-	elif (count % 2 == 1 && handIndex > count/2):
-		position.y -= offset.y
-		rotate(-rot)
+		if (count % 2 == 0 && handIndex <= count/2):
+			position.y += offset.y
+			rotate(-rot)
+			
+		elif (count % 2 == 1 && handIndex > count/2):
+			position.y -= offset.y
+			rotate(-rot)
+	else:
+		originalPos.x -= offset.x
 		
-	print(str(handIndex) + "-> pos: " + str(position) + " rot: " + str(rotation))
-	
+		if (count % 2 == 0 && handIndex <= count/2):
+			originalPos.y += offset.y
+			originalRot -= rot
+			
+		elif (count % 2 == 1 && handIndex > count/2):
+			originalPos.y -= offset.y
+			originalRot -= rot
