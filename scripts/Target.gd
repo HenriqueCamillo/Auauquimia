@@ -24,6 +24,8 @@ func _process(delta):
 			highlight = true
 			get_tree().call_group("hand","chooseSlot", $".")
 		elif highlight && distance > limit:
+			if target == slotCard:
+				get_parent().eraseCard(index)
 			highlight = false
 			get_tree().call_group("hand","forgetSlot")
 #	pass
