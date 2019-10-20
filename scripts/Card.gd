@@ -52,9 +52,10 @@ func _process(delta):
 		if !isGrabbed:
 			isGrabbed = true
 			mouseOffset = position - mousePos
-			originalPos = position
-			originalRot = rotation
-			originalZ = z_index
+			if (inHand):
+				originalPos = position
+				originalRot = rotation
+				originalZ = z_index
 			rotation = 0.0
 			z_index = 5
 			get_parent().grabCard($".")
@@ -63,8 +64,7 @@ func _process(delta):
 			
 	if (Input.is_action_just_released("left_click") && isGrabbed):
 		isGrabbed = false
-		if inHand:
-			get_parent().releaseCard()
+		get_parent().releaseCard()
 		#onRelease(null)
 	pass
 
@@ -80,18 +80,31 @@ func onRelease(destiny):
 		position = originalPos
 		rotation = originalRot
 		z_index = originalZ
+		inHand = true
 	else:
 		destiny.add_child($".")
 		global_position = destiny.global_position
-		destiny.interact()
+		destiny.interact($".")
+		inHand = false
 	
 func shift(offset, count, rot):
-	position.x -= offset.x
-	
-	if (count % 2 == 0 && handIndex <= count/2):
-		position.y += offset.y
-		rotate(-rot)
+	if inHand:
+		position.x -= offset.x
 		
-	elif (count % 2 == 1 && handIndex > count/2):
-		position.y -= offset.y
-		rotate(-rot)
+		if (count % 2 == 0 && handIndex <= count/2):
+			position.y += offset.y
+			rotate(-rot)
+			
+		elif (count % 2 == 1 && handIndex > count/2):
+			position.y -= offset.y
+			rotate(-rot)
+	else:
+		originalPos.x -= offset.x
+		
+		if (count % 2 == 0 && handIndex <= count/2):
+			originalPos.y += offset.y
+			originalRot -= rot
+			
+		elif (count % 2 == 1 && handIndex > count/2):
+			originalPos.y -= offset.y
+			originalRot -= rot

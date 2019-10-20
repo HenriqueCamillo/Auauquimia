@@ -8,6 +8,10 @@ signal exit
 var target = null
 var limit = 80
 
+var slotCard = null
+export (bool) var isEntity
+export (int) var index
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -33,5 +37,12 @@ func goSleep():
 	highlight = false
 	target = null
 	
-func interact():
+func interact(card):
+	slotCard = card
+	if !isEntity:
+		get_parent().placeCard(index, card)
 	print("LEEEEROOOOOOYYY")
+
+func erase():
+	slotCard = null
+	goSleep()
