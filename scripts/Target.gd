@@ -43,6 +43,10 @@ func interact(card):
 	slotCard = card
 	if !isEntity:
 		get_parent().placeCard(index, card)
+	else:
+		var cardInfo = load("res://cards/" + card.title.to_lower() + ".tres")
+		#GameManager(player, cardInfo, get_parent().enemy???)
+		pass
 	print("LEEEEROOOOOOYYY")
 
 func erase():
