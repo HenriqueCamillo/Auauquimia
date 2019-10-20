@@ -13,5 +13,5 @@ card = ExtResource( 2 )
 offset = Vector2( 120, 40 )
 
 [node name="Target" parent="." instance=ExtResource( 3 )]
-position = Vector2( -638.453, -356.715 )
+position = Vector2( -549.842, -209.031 )
 

@@ -82,7 +82,7 @@ func onRelease(destiny):
 		z_index = originalZ
 	else:
 		destiny.add_child($".")
-		position = Vector2(0,0)
+		global_position = destiny.global_position
 		destiny.interact()
 	
 func shift(offset, count, rot):

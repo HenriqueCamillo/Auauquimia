@@ -51,15 +51,13 @@ func drawCard():
 
 func grabCard(card):
 	cardOnHand = card
-	get_tree().call_group("target","beAware")
+	get_tree().call_group("target","beAware", card)
 
 func chooseSlot(slot):
 	chosenSlot = slot
-	print("achou")
 
 func forgetSlot():
 	chosenSlot = null
-	print("sumiu!")
 
 func releaseCard():
 	get_tree().call_group("target","goSleep")

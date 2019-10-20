@@ -5,34 +5,33 @@ var highlight = false
 signal enter
 signal exit
 
-var target = Vector2(0,0)
+var target = null
+var limit = 80
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
+func _process(delta):
+	if searching:
+		var distance = (global_position - target.global_position).length()
+		if !highlight && distance <= limit:
+			highlight = true
+			get_tree().call_group("hand","chooseSlot", $".")
+		elif highlight && distance > limit:
+			highlight = false
+			get_tree().call_group("hand","forgetSlot")
 #	pass
 
-func beAware():
+func beAware(card):
 	searching = true
+	target = card
 	
 func goSleep():
 	searching = false
 	highlight = false
-
-func onMouseEnter():
-	if searching:
-		highlight = true
-		get_tree().call_group("hand","chooseSlot", $".")
-	pass # Replace with function body.
-
-func onMouseExit():
-	if searching && highlight:
-		highlight = false
-		get_tree().call_group("hand","forgetSlot")
-	pass # Replace with function body.
+	target = null
 	
 func interact():
 	print("LEEEEROOOOOOYYY")
