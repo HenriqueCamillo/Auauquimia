@@ -13,7 +13,12 @@ var cardCount = 0
 #arrays
 var deck = ["fire", "water", "energy", "air"]
 
+signal grab
+signal release
+
 #aux
+var cardOnHand = null
+var chosenSlot = null
 var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
@@ -43,3 +48,21 @@ func drawCard():
 		#initialize card
 		var sortCard = rng.randi_range(0, deck.size() - 1)
 		c.init(deck[sortCard], cardCount)
+
+func grabCard(card):
+	cardOnHand = card
+	get_tree().call_group("target","beAware")
+
+func chooseSlot(slot):
+	chosenSlot = slot
+	print("achou")
+
+func forgetSlot():
+	chosenSlot = null
+	print("sumiu!")
+
+func releaseCard():
+	get_tree().call_group("target","goSleep")
+	cardOnHand.onRelease(chosenSlot)
+	cardOnHand = null
+	chosenSlot = null
