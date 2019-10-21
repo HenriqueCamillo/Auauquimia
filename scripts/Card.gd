@@ -110,3 +110,22 @@ func shift(offset, count, rot):
 		elif (count % 2 == 1 && handIndex > count/2):
 			originalPos.y -= offset.y
 			originalRot -= rot
+			
+func refresh(index, offset, count, rot):
+	if handIndex == index:
+		remove_from_group("cards")
+		queue_free()
+		
+	if handIndex > index:
+		shift(offset, count, rot)
+		handIndex -= 1
+	else:
+		shift(-offset, count, -rot)
+		
+	print(title + "->" + str(handIndex))
+	
+	
+		
+		
+		
+		

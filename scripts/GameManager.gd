@@ -188,7 +188,6 @@ func castCard(caster, card, target):
 
 func getFusionCard(card1, card2):
 	var result = getFusionResultType(card1.type - 1, card2.type - 1)
-	print(result)
 	if (result != Type.None):
 		for i in range(cards.size()):
 			if (cards[i].type == result):

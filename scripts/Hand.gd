@@ -2,7 +2,7 @@ extends Node2D
 
 #exports
 export (PackedScene) var card
-export (int) var cardMax = 1000
+export (int) var cardMax = 7
 export (Vector2) var center = Vector2(0, 0)
 export (Vector2) var offset = Vector2(150, 50)
 export (float) var rot = 0.25
@@ -67,3 +67,8 @@ func releaseCard():
 	cardOnHand.onRelease(chosenSlot)
 	cardOnHand = null
 	chosenSlot = null
+	
+func eraseCard(index):
+	get_tree().call_group("cards", "refresh", index, offset/2, cardCount, rot/2)
+	cardCount -= 1
+		

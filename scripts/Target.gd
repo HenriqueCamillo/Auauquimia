@@ -50,7 +50,7 @@ func interact(card):
 		var gm = get_parent().gm
 		gm.castCard(gm.player, cardInfo, get_parent())
 		
-		card.queue_free()
+		card.get_parent().eraseCard(card.handIndex)
 		pass
 	print("LEEEEROOOOOOYYY")
 
