@@ -36,6 +36,7 @@ animations = [ {
 } ]
 
 [node name="Enemy" type="Node2D"]
+z_index = -1
 script = ExtResource( 1 )
 life = 10
 maxCardsOnTurnEnd = 4
@@ -53,5 +54,6 @@ index = -1
 position = Vector2( 1004.36, 465.315 )
 scale = Vector2( 7.12859, 7.12859 )
 frames = SubResource( 1 )
-frame = 19
+frame = 13
 playing = true
+

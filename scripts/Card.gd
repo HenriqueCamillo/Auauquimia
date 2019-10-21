@@ -15,7 +15,7 @@ var handIndex = 0
 var title = ""
 var damage = 0.0
 var heal = 0.0
-var effect = 0
+#var effect = 0
 var type = 0
 var desc = ""
 
@@ -36,7 +36,7 @@ func init(cardName, index):
 	var info = load("res://cards/" + cardName + ".tres")
 	title = info.name
 	type = info.type
-	effect = info.effect
+	#effect = info.effect
 	damage = info.damage
 	heal = info.heal
 	desc = info.desc

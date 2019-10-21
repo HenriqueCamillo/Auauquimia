@@ -10,7 +10,8 @@
 position = Vector2( 640, 360 )
 script = ExtResource( 1 )
 card = ExtResource( 2 )
-offset = Vector2( 120, 40 )
+center = Vector2( 0, 175 )
+offset = Vector2( 70, 30 )
 
 [node name="Table" parent="." instance=ExtResource( 3 )]
 position = Vector2( -393.982, -262.028 )

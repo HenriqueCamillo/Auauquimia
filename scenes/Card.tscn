@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/Card.gd" type="Script" id=1]
-[ext_resource path="res://art/cards/metal.png" type="Texture" id=2]
+[ext_resource path="res://art/cartas/carta agua + eletricidade LV2.png" type="Texture" id=2]
 [ext_resource path="res://font/Upheaval Upgrade.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 30
+size = 14
 font_data = ExtResource( 3 )
 
 [node name="Card" type="Node2D"]
@@ -16,21 +16,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -70.0
-margin_top = -123.0
-margin_right = 70.0
-margin_bottom = 123.0
+margin_left = -40.0
+margin_top = -70.0
+margin_right = 40.0
+margin_bottom = 70.0
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 5
 
 [node name="Name" type="Label" parent="."]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -70.0
-margin_top = -123.0
-margin_right = 69.0
-margin_bottom = -95.0
+anchor_bottom = 0.5
+margin_left = -31.0
+margin_right = 32.0
+margin_bottom = 14.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Nome"
